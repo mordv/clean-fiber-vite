@@ -4,7 +4,7 @@ Vite template with my 3D stack.
 - [Zustand](https://github.com/pmndrs/zustand) & [immer](https://github.com/immerjs/immer) for state management
 - [leva](https://github.com/pmndrs/leva) for GUI controls
 
-###Start project
+### Start project
 ```bash
 npm install -g degit
 
