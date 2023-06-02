@@ -1,12 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Sphere } from '@react-three/drei';
 import { useFancyDrag } from '../utils/sceneUtils';
-import { Mesh, Object3D, Vector3, WireframeGeometry } from 'three';
+import { Group, LineSegments, Mesh, Vector3, WireframeGeometry } from 'three';
 import { ConvexGeometry } from 'three/examples/jsm/geometries/ConvexGeometry';
 import { toString } from '../utils/vectorUtils';
 import { GroupProps, MeshProps, useFrame } from '@react-three/fiber';
-import { intRange } from '../utils/utils';
-import { mapRange } from '../utils/mathUtils';
+import { intRange, mapRange } from '@mordv/utils';
 
 const initialPositions = Array.from({ length: 20 })
   .map(() =>
@@ -16,10 +15,10 @@ const initialPositions = Array.from({ length: 20 })
   )
   .map(([x, y, z]) => new Vector3(x, y, Math.abs(z)));
 
-export const InteractiveConvexGeometry: React.VFC<GroupProps> = ({ ...rest }) => {
-  const groupRef = useRef<Object3D>();
-  const convexRef = useRef<Mesh>();
-  const wireframeRef = useRef<Mesh>();
+export const InteractiveConvexGeometry: React.FC<GroupProps> = ({ ...rest }) => {
+  const groupRef = useRef<Group>(null);
+  const convexRef = useRef<Mesh>(null);
+  const wireframeRef = useRef<LineSegments>(null);
   const [points, setPoints] = useState(initialPositions);
 
   const updateGeometries = useCallback(() => {
@@ -51,7 +50,7 @@ export const InteractiveConvexGeometry: React.VFC<GroupProps> = ({ ...rest }) =>
         ))}
       </group>
       <mesh ref={convexRef} onClick={({ point, ctrlKey }) => ctrlKey && setPoints((p) => [point, ...p])}>
-        <meshBasicMaterial transparent={true} opacity={0.2} color={`#22ff44`} />
+        <meshBasicMaterial args={[{ transparent: true }]} opacity={0.2} color={`#22ff44`} />
       </mesh>
       <lineSegments ref={wireframeRef}>
         <lineBasicMaterial color={`#22ff44`} />
@@ -67,8 +66,8 @@ interface PointProps {
   onChange(): void;
 }
 
-const Point: React.VFC<PointProps & MeshProps> = ({ onChange, index, onDelete, ...rest }) => {
-  const sphereRef = useRef<Mesh>();
+const Point: React.FC<PointProps & MeshProps> = ({ onChange, index, onDelete, ...rest }) => {
+  const sphereRef = useRef<Mesh>(null);
   const [hovered, setHovered] = useState(false);
 
   useFrame(() => sphereRef.current?.scale.setScalar(hovered ? 1.1 : 1));

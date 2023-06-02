@@ -1,4 +1,4 @@
-import { DoubleSide, Mesh, MeshBasicMaterial, Object3D, SphereBufferGeometry, Vector3, Vector3Tuple } from 'three';
+import { DoubleSide, Mesh, MeshBasicMaterial, Object3D, SphereGeometry, Vector3, Vector3Tuple } from 'three';
 import { convertOrClone } from './vectorUtils';
 import React from 'react';
 import { Sphere } from '@react-three/drei';
@@ -16,7 +16,7 @@ export const createPointHelper = (
   attachTo: Object3D,
   { color = `red`, radius = 0.2, id = Math.random().toString() }: PointHelperConfig = {}
 ): void => {
-  const m = new Mesh(new SphereBufferGeometry(radius, 42, 42), new MeshBasicMaterial({ color }));
+  const m = new Mesh(new SphereGeometry(radius, 42, 42), new MeshBasicMaterial({ color }));
   m.position.copy(convertOrClone(point));
   if (id !== lastId) {
     attachTo.remove(...prevMeshes);
@@ -34,7 +34,7 @@ export const replace = (object: Object3D, attachTo: Object3D, name = `replaceabl
 };
 
 type PointHelperProps = Pick<PointHelperConfig, 'radius' | 'color'> & { point: Vector3 | Vector3Tuple };
-export const PointHelper: React.VFC<PointHelperProps> = ({ radius, color }) => (
+export const PointHelper: React.FC<PointHelperProps> = ({ radius, color }) => (
   <Sphere args={[radius, 42, 42]}>
     <meshBasicMaterial color={color} />
   </Sphere>

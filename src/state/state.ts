@@ -1,9 +1,8 @@
-import create, { GetState, SetState, State, StateCreator, StoreApi } from 'zustand';
-import produce from 'immer';
+import { create, GetState, SetState, StateCreator, StoreApi } from 'zustand';
+import { produce } from 'immer';
 import { devtools } from 'zustand/middleware';
-import { WritableDraft } from 'immer/dist/types/types-external';
 
-export interface AppState extends State {
+export interface AppState {
   counter: number;
   inc(): void;
   dec(): void;
@@ -17,10 +16,10 @@ const loggerMiddleware =
       set(state);
     }, ...rest);
 
-export const useAppStore = create<AppState>(
-  loggerMiddleware(
-    devtools((set) => {
-      const setMutable = (mutator: (draft: WritableDraft<AppState>) => void) => set(produce(mutator));
+export const useAppStore = create<AppState>()(
+  devtools(
+    loggerMiddleware((set) => {
+      const setMutable = (mutator: (draft: AppState) => void) => set(produce(mutator));
 
       return {
         counter: 0,

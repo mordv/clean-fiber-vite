@@ -13,7 +13,7 @@ interface TestBoxProps {
   onClick?(): void;
 }
 
-export const TestBox: React.VFC<TestBoxProps> = ({ hoveredColor, ...rest }) => {
+export const TestBox: React.FC<TestBoxProps> = ({ hoveredColor, ...rest }) => {
   const [hovering, setHovering] = useState(false);
 
   const box = useRef<Mesh>(null);
@@ -32,7 +32,7 @@ export const TestBox: React.VFC<TestBoxProps> = ({ hoveredColor, ...rest }) => {
   useEffect(() => setCursor(hovering ? `pointer` : `auto`), [hovering]);
 
   return (
-    <RoundedBox ref={box} args={[5, 5, 5]} radius={1} smoothness={4} {...rest} {...(bind() as never)}>
+    <RoundedBox ref={box} args={[5, 5, 5]} radius={1} smoothness={4} {...rest} {...(bind() as any)}>
       <meshPhongMaterial color={hovering ? hoveredColor || `red` : `white`} />
     </RoundedBox>
   );

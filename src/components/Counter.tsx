@@ -1,13 +1,13 @@
 import React from 'react';
 import { AppState, useAppStore } from '../state/state';
-import shallow from 'zustand/shallow';
+import { shallow } from 'zustand/shallow';
 import { Text } from '@react-three/drei';
 import { TestBox } from '../scene/TestBox';
 import { GroupProps } from '@react-three/fiber';
 
 const selector = ({ dec, inc, counter }: AppState) => ({ dec, inc, counter });
 
-export const Counter: React.VFC<GroupProps> = ({ ...rest }) => {
+export const Counter: React.FC<GroupProps> = ({ ...rest }) => {
   const { counter, inc, dec } = useAppStore(selector, shallow);
 
   return (

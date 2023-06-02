@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Plane, Vector3 } from 'three';
-import { ThreeEvent } from '@react-three/fiber/dist/declarations/src/core/events';
 import { useGesture, Vector2 } from '@use-gesture/react';
 import { buttonsParser } from './buttonsParser';
+import { ThreeEvent } from '@react-three/fiber';
 
 export const setCursor = (cursor: 'pointer' | 'auto' = `auto`): void => void (document.body.style.cursor = cursor);
 
@@ -26,13 +26,14 @@ export const useFancyDrag = (
     {
       onDrag: ({ first, last, event }) => {
         event.stopPropagation();
-        const { ray, object, camera, buttons } = event as ThreeEvent<PointerEvent>;
+        const e = event as any as ThreeEvent<PointerEvent>;
+        const { ray, object, camera, buttons } = e;
         const position = object.getWorldPosition(new Vector3());
         if (buttonsParser(buttons).primary) {
           if (first) {
             const normal = new Vector3(0, 0, -1).unproject(camera).normalize();
             planeRef.current?.setFromNormalAndCoplanarPoint(normal, position);
-            onClick(event as ThreeEvent<PointerEvent>);
+            onClick(e);
             // onDrag({ point: position });
           } else {
             const point = ray.intersectPlane(planeRef.current, new Vector3());

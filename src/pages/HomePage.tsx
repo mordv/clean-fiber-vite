@@ -3,7 +3,7 @@ import { ApplicationScene } from '../scene/ApplicationScene';
 import { Counter } from '../components/Counter';
 import { InteractiveConvexGeometry } from '../components/InteractiveConvexGeometry';
 
-export const HomePage: React.VFC = () => (
+export const HomePage: React.FC = () => (
   <ApplicationScene>
     <Counter position={[0, 0, -10]} />
     <InteractiveConvexGeometry position={[0, 0, 10]} />

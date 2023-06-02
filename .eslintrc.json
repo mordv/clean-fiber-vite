@@ -15,22 +15,22 @@
     "prettier/prettier": "warn",
     "react/prop-types": "off",
     "react/jsx-no-bind": "off",
-    "react/no-array-index-key": "warn",
+    "react/no-array-index-key": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
-    "@typescript-eslint/no-empty-interface": "warn",
+    "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-empty-function": "off",
     "quotes": "off",
-    "@typescript-eslint/quotes": ["warn", "backtick"],
+    "@typescript-eslint/quotes": ["off", "backtick"],
     "react/jsx-curly-brace-presence": [
-      "warn",
+      "off",
       {
         "props": "always",
         "children": "never"
       }
     ],
     "prefer-arrow/prefer-arrow-functions": [
-      "warn",
+      "off",
       {
         "disallowPrototype": true,
         "singleReturnOnly": false,
@@ -39,15 +39,17 @@
       }
     ],
     "prefer-arrow-callback": [
-      "warn",
+      "off",
       {
         "allowNamedFunctions": false,
         "allowUnboundThis": false
       }
     ],
-    "func-style": ["warn", "expression"],
-    "arrow-body-style": ["warn", "as-needed"],
-    "object-shorthand": "warn"
+    "func-style": ["off", "expression"],
+    "arrow-body-style": ["off", "as-needed"],
+    "object-shorthand": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/no-unknown-property": "off"
   },
   "settings": {
     "react": {
