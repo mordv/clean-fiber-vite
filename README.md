@@ -15,4 +15,4 @@ npm install -g degit
 
 degit mordv/clean-fiber-vite
 ```
-Se details for [Degit](https://github.com/Rich-Harris/degit)
+See details for [Degit](https://github.com/Rich-Harris/degit)
